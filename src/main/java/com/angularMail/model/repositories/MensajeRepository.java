@@ -15,4 +15,9 @@ public interface MensajeRepository extends CrudRepository<Mensaje, Integer> {
 			+ "where d.idMensaje = m.id and d.idDestinatario = ? and d.archivado = 0 "
 			+ "and d.spam = 0 and d.fechaEliminacion is null order by m.fecha desc limit ?, ?", nativeQuery = true)
 	public List<Mensaje> getMensajesRecibidosDeUsuarioDesdeCRUDRepository(int idUsuario, int pagina, int elementosPorPagina);
-}
+
+	@Query(value = "SELECT * FROM Mensaje as m "
+			+ "where m.idEmisor = ? "
+			+ " order by m.id asc limit ?, ?", nativeQuery = true)
+	public List<Mensaje> getMensajesEnviadosdosDeUsuarioDesdeCRUDRepository(int idUsuario, int pagina, int elementosPorPagina);
+	}
